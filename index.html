@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Scorekeeper Direct</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="setup-screen" class="container active">
+        <h1>Neues Spiel</h1>
+        <div class="form-group">
+            <label>Spieleranzahl</label>
+            <input type="number" id="playerCount" value="4" min="2" max="10">
+        </div>
+        <div class="form-group">
+            <label>Zielpunktzahl (Optional)</label>
+            <input type="number" id="targetScore" placeholder="z.B. 100">
+        </div>
+        <button class="btn" onclick="goToNames()">Weiter</button>
+        <div style="margin-top: 20px; text-align: center;">
+            <button class="btn btn-secondary btn-small" onclick="checkStorageAndLoad()">🔄 Laden</button>
+        </div>
+    </div>
+
+    <div id="names-screen" class="container">
+        <h1>Namen</h1>
+        <div id="names-inputs"></div>
+        <button class="btn" onclick="startGame()">Start 🚀</button>
+        <button class="btn btn-secondary" onclick="showScreen('setup-screen')">Zurück</button>
+    </div>
+
+    <div id="game-screen" class="container">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h2 style="margin:0;">Runde <span id="round-display">1</span></h2>
+            <button class="btn-small btn-danger" onclick="hardReset()">Reset</button>
+        </div>
+        
+        <p id="dealer-info" style="text-align:center; color: var(--dealer-color); font-weight:bold; margin-bottom:10px; font-size: 0.9rem;"></p>
+
+        <div style="display:grid; grid-template-columns: 30px 1fr 70px 50px; gap:10px; padding:0 10px; margin-bottom:5px; font-size:0.8rem; color:#888;">
+            <div>#</div>
+            <div>Name</div>
+            <div style="text-align:center;">Runde</div>
+            <div style="text-align:right;">Gesamt</div>
+        </div>
+
+        <div id="scoreboard" class="player-list"></div>
+
+        <button class="btn" onclick="commitRound()">💾 Runde speichern</button>
+        <button class="btn btn-secondary" onclick="showStats()" style="margin-top:20px;">📊 Auswertung</button>
+    </div>
+
+    <div id="stats-screen" class="container">
+        <h1>Auswertung</h1>
+        <div id="fun-facts-container"></div>
+        <button class="btn" onclick="showScreen('game-screen')">Zurück</button>
+        <button class="btn btn-danger" onclick="hardReset()">Neues Spiel</button>
+    </div>
+
+</body>
+</html>
